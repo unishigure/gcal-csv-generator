@@ -140,6 +140,7 @@ export default function ScheduleTable() {
         if (isInEditMode) {
           return [
             <GridActionsCellItem
+              key={"save"}
               icon={<SaveIcon />}
               label="Save"
               sx={{
@@ -148,6 +149,7 @@ export default function ScheduleTable() {
               onClick={handleSaveClick(id)}
             />,
             <GridActionsCellItem
+              key={"cancel"}
               icon={<CancelIcon />}
               label="Cancel"
               className="textPrimary"
@@ -159,6 +161,7 @@ export default function ScheduleTable() {
 
         return [
           <GridActionsCellItem
+            key={"edit"}
             icon={<EditIcon />}
             label="Edit"
             className="textPrimary"
@@ -166,6 +169,7 @@ export default function ScheduleTable() {
             color="inherit"
           />,
           <GridActionsCellItem
+            key={"delete"}
             icon={<DeleteIcon />}
             label="Delete"
             onClick={handleDeleteClick(id)}
