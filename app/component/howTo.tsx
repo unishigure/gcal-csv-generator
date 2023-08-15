@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import Link from "@mui/material/Link";
@@ -34,7 +35,7 @@ export default function HowToDialog() {
         <DialogTitle id="alert-dialog-title">
           {"How to add Google Calender events"}
         </DialogTitle>
-        <DialogContent>
+        <DialogContent sx={{paddingBottom: "0"}}>
           <DialogContentText id="alert-dialog-description">
             <ol className="list-decimal pl-4 pr-4">
               <li>{"テキストエディタでCSVファイルを新規作成する"}</li>
@@ -53,11 +54,26 @@ export default function HowToDialog() {
               <li>
                 {"作成したCSVファイルを"}
                 <Link href="https://calendar.google.com/" underline="hover">
-                  {"Googleカレンダー"}
+                  {"Google カレンダー"}
                 </Link>
                 {"にインポートする"}
               </li>
             </ol>
+            <Box
+              sx={{
+                display: "flex",
+                fontSize: "0.95rem",
+                marginTop: "0.5rem",
+                justifyContent: "right",
+              }}
+            >
+              <Link
+                href="https://support.google.com/calendar/answer/37118"
+                underline="hover"
+              >
+                {"Google カレンダーに予定を読み込む - Google カレンダー ヘルプ"}
+              </Link>
+            </Box>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
