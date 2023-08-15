@@ -119,7 +119,7 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
           <Button
             variant="outlined"
             onClick={handleClickHeaderCopy}
-            className="ml-40 mr-0"
+            sx={{ marginLeft: "9.5rem" }}
           >
             Header Copy
           </Button>
