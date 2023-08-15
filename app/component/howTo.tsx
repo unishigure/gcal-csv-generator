@@ -35,7 +35,7 @@ export default function HowToDialog() {
         <DialogTitle id="alert-dialog-title">
           {"How to add Google Calender events"}
         </DialogTitle>
-        <DialogContent sx={{paddingBottom: "0"}}>
+        <DialogContent sx={{ paddingBottom: "0" }}>
           <DialogContentText id="alert-dialog-description">
             <ol className="list-decimal pl-4 pr-4">
               <li>{"テキストエディタでCSVファイルを新規作成する"}</li>
@@ -53,7 +53,12 @@ export default function HowToDialog() {
               <li>{"上記4~6を、追加したい予定の数だけ繰り返す"}</li>
               <li>
                 {"作成したCSVファイルを"}
-                <Link href="https://calendar.google.com/" underline="hover">
+                <Link
+                  href="https://calendar.google.com/calendar/u/0/r/settings/export"
+                  underline="hover"
+                  target="_blank"
+                  rel="noopener"
+                >
                   {"Google カレンダー"}
                 </Link>
                 {"にインポートする"}
@@ -70,6 +75,8 @@ export default function HowToDialog() {
               <Link
                 href="https://support.google.com/calendar/answer/37118"
                 underline="hover"
+                target="_blank"
+                rel="noopener"
               >
                 {"Google カレンダーに予定を読み込む - Google カレンダー ヘルプ"}
               </Link>
