@@ -59,9 +59,9 @@ export default function HowToDialog() {
                   target="_blank"
                   rel="noopener"
                 >
-                  {"Google カレンダー"}
+                  {"Google カレンダーにインポート"}
                 </Link>
-                {"にインポートする"}
+                {"する"}
               </li>
             </ol>
             <Box
