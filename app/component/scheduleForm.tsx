@@ -3,128 +3,281 @@
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
-import { Button, Checkbox, TextField } from "@mui/material";
-import dayjs from "dayjs";
+import { Box, Button, Checkbox, TextField, Snackbar } from "@mui/material";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+
+import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/ja";
 
-import { GridRowsProp } from "@mui/x-data-grid";
+import { randomId } from "@mui/x-data-grid-generator";
+import { useState, forwardRef } from "react";
 
-var rows: GridRowsProp = [
-  {
-    id: 1,
-    sub: "workday",
-    sd: "2023/08/21",
-    st: "09:00",
-    ed: "2023/08/21",
-    et: "18:00",
-    isAl: "False",
-    des: "Hello, working.",
-    loc: "office",
-    isPr: "True",
-  },
-];
+const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
-export default function ScheduleForm() {
+export default function ScheduleForm(scheduleRows: Array<Object>) {
+  const [rows, setRows] = useState(scheduleRows);
+
+  const [subject, setSubject] = useState<string>("");
+  const [start_date, setStartDate] = useState<Dayjs>(dayjs());
+  const [start_time, setStartTime] = useState<Dayjs | null>(null);
+  const [end_date, setEndDate] = useState<Dayjs | null>(null);
+  const [end_time, setEndTime] = useState<Dayjs | null>(null);
+  const [is_all_day, setIsAllDay] = useState<boolean>(false);
+  const [description, setDescription] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [is_private, setIsPrivate] = useState<boolean>(false);
+
+  const [openInvalid, setOpenInvalid] = useState<boolean>(false);
+  const [openCopied, setOpenCopied] = useState<boolean>(false);
+  const [openFailed, setOpenFailed] = useState<boolean>(false);
+
+  function handleClickHeaderCopy() {
+    const tag =
+      `Subject,Start Date,Start Time,End Date,End Time,` +
+      `All Day Event,Description,Location,Private\n`;
+    copyToClipboard(tag);
+  }
+
+  function handleClickCopy() {
+    if (!start_date || !start_date.isValid()) {
+      setOpenInvalid(true);
+      return;
+    }
+
+    const newEvent = {
+      id: randomId(),
+      sub: subject,
+      sd: start_date.format("YYYY/MM/DD"),
+      st: start_time ? start_time.format("HH:mm") : "",
+      ed: end_date ? end_date.format("YYYY/MM/DD") : "",
+      et: end_time ? end_time.format("HH:mm") : "",
+      isAl: is_all_day,
+      des: description,
+      loc: location,
+      isPr: is_private,
+    };
+    const tag =
+      `${newEvent.sub},` +
+      `${newEvent.sd},${newEvent.st},${newEvent.ed},${newEvent.et},` +
+      `${newEvent.isAl},${newEvent.des},${newEvent.loc},${newEvent.isPr}`;
+
+    copyToClipboard(tag);
+  }
+
+  const handleCloseInvalid = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") return;
+    setOpenInvalid(false);
+  };
+
+  const handleCloseCopied = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") return;
+    setOpenCopied(false);
+  };
+
+  const handleCloseFailed = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") return;
+    setOpenFailed(false);
+  };
+
+  function copyToClipboard(tagValue: string) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(tagValue);
+      setOpenCopied(true);
+    } else {
+      setOpenFailed(true);
+    }
+  }
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ja">
-      <div className="m-4 pb-4 border">
-        <div className="m-4 p-4">
+      <Box className="m-4 pb-4 border" sx={{ boxShadow: 3 }}>
+        <Box className="m-4 p-4">
           <TextField
-            required
-            id="subject"
+            autoFocus
             label="Subject"
+            value={subject}
             variant="standard"
             helperText="予定の名前"
+            onChange={(event) => {
+              setSubject(event.target.value);
+            }}
           />
-        </div>
-        <div className="m-4">
+          <Button
+            variant="outlined"
+            onClick={handleClickHeaderCopy}
+            className="ml-40 mr-0"
+          >
+            Header Copy
+          </Button>
+          <Snackbar
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            open={openInvalid}
+            autoHideDuration={3000}
+            onClose={handleCloseInvalid}
+          >
+            <Alert
+              onClose={handleCloseInvalid}
+              severity="error"
+              sx={{ width: "100%" }}
+            >
+              Start Date is Required.
+            </Alert>
+          </Snackbar>
+        </Box>
+        <Box className="m-4">
           <DatePicker
             label="Start Date"
+            value={start_date}
             defaultValue={dayjs()}
             slotProps={{
-              actionBar: { actions: ["today", "clear"] },
+              actionBar: { actions: ["today"] },
               textField: {
                 helperText: "予定の開始日",
               },
             }}
+            onChange={(event) => {
+              if (event) {
+                setStartDate(event);
+              }
+            }}
           />
           <TimePicker
             label="Start Time"
+            value={start_time}
             slotProps={{
               actionBar: { actions: ["clear"] },
               textField: {
                 helperText: "予定の開始時刻",
               },
             }}
+            onChange={(value) => {
+              setStartTime(value);
+            }}
           />
-        </div>
-        <div className="m-4">
+        </Box>
+        <Box className="m-4">
           <DatePicker
             label="End Date"
-            defaultValue={dayjs()}
+            value={end_date}
             slotProps={{
-              actionBar: { actions: ["today", "clear"] },
+              actionBar: { actions: ["clear", "today"] },
               textField: {
                 helperText: "予定の終了日",
               },
             }}
+            onChange={(event) => {
+              setEndDate(event);
+            }}
           />
           <TimePicker
             label="End Time"
+            value={end_time}
             slotProps={{
               actionBar: { actions: ["clear"] },
               textField: {
                 helperText: "予定の終了時刻",
               },
             }}
+            onChange={(value) => {
+              setEndTime(value);
+            }}
           />
-        </div>
-        <div className="m-4 flex">
-          <Checkbox id="is-all-day-event" />
+        </Box>
+        <Box className="m-4 flex">
+          <Checkbox
+            value={is_all_day}
+            onChange={() => {
+              setIsAllDay(!is_all_day);
+            }}
+          />
           <span className="mt-auto mb-auto">All Day Event</span>
           <span className="mt-auto mb-auto ml-2 text-xs">
             終日の予定かどうかを示します。
           </span>
-        </div>
-        <div className="m-4">
+        </Box>
+        <Box className="m-4">
           <TextField
             label="Description"
+            value={description}
             multiline
             helperText="予定についての説明またはメモ"
             variant="outlined"
+            onChange={(event) => {
+              setDescription(event.target.value);
+            }}
           />
-        </div>
-        <div className="m-4">
+        </Box>
+        <Box className="m-4">
           <TextField
             label="Location"
+            value={location}
             helperText="予定の場所"
             variant="outlined"
+            onChange={(event) => {
+              setLocation(event.target.value);
+            }}
           />
-        </div>
-        <div className="m-4 flex">
+        </Box>
+        <Box className="m-4 flex">
           <Checkbox
-            id="is-private"
+            value={is_private}
             onChange={() => {
-              alert("checked");
+              setIsPrivate(!is_private);
             }}
           />
           <span className="mt-auto mb-auto">Private</span>
           <span className="mt-auto mb-auto ml-2 text-xs">
             予定を限定公開にするかどうかを指定します。
           </span>
-        </div>
-        <div className="w-20 ml-auto mr-0">
-          <Button
-            id="add"
-            variant="contained"
-            onClick={() => {
-              alert("clicked");
-            }}
-          >
-            <span>Add</span>
+        </Box>
+        <Box className="w-20 ml-auto mr-2">
+          <Button variant="contained" onClick={handleClickCopy}>
+            Copy
           </Button>
-        </div>
-      </div>
+          <Snackbar
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            open={openCopied}
+            autoHideDuration={3000}
+            onClose={handleCloseCopied}
+          >
+            <Alert
+              onClose={handleCloseCopied}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Copied!
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            open={openFailed}
+            autoHideDuration={3000}
+            onClose={handleCloseFailed}
+          >
+            <Alert
+              onClose={handleCloseFailed}
+              severity="error"
+              sx={{ width: "100%" }}
+            >
+              Copy to clipboard is unsupported.
+            </Alert>
+          </Snackbar>
+        </Box>
+      </Box>
     </LocalizationProvider>
   );
 }
