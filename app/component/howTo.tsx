@@ -37,7 +37,7 @@ export default function HowToDialog() {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <ol className="list-decimal pl-4 pr-4">
-              <li>{"CSVファイルを新規作成する"}</li>
+              <li>{"テキストエディタでCSVファイルを新規作成する"}</li>
               <li>
                 <b>{"Header Copy"}</b>
                 {"ボタンを押下し、ヘッダーをクリップボードにコピー"}
