@@ -115,6 +115,7 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
             onChange={(event) => {
               setSubject(event.target.value);
             }}
+            sx={{ width: "100%" }}
           />
           <Snackbar
             anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
@@ -212,6 +213,7 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
             onChange={(event) => {
               setDescription(event.target.value);
             }}
+            sx={{ width: "100%" }}
           />
         </Box>
         <Box className="m-4">
@@ -223,6 +225,7 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
             onChange={(event) => {
               setLocation(event.target.value);
             }}
+            sx={{ width: "100%" }}
           />
         </Box>
         <Box className="m-4 flex">
@@ -237,16 +240,20 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
             予定を限定公開にするかどうかを指定します。
           </span>
         </Box>
-        <Box sx={{ margin: "1rem" }}>
+        <Box sx={{ margin: "1rem", display: "flex", justifyContent: "center" }}>
           <Button
             variant="outlined"
             onClick={handleClickHeaderCopy}
-            sx={{ boxShadow: 3 }}
+            sx={{ margin: "0 0.25rem", boxShadow: 2 }}
           >
-            Header Copy
+            {"Header Copy"}
           </Button>
-          <Button variant="contained" onClick={handleClickCopy} sx={{ marginLeft: "0.5rem" }}>
-            Event Copy
+          <Button
+            variant="contained"
+            onClick={handleClickCopy}
+            sx={{ margin: "0 0.25rem" }}
+          >
+            {"Event Copy"}
           </Button>
           <Snackbar
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
