@@ -116,13 +116,6 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
               setSubject(event.target.value);
             }}
           />
-          <Button
-            variant="outlined"
-            onClick={handleClickHeaderCopy}
-            sx={{ marginLeft: "9.5rem" }}
-          >
-            Header Copy
-          </Button>
           <Snackbar
             anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             open={openInvalid}
@@ -244,9 +237,16 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
             予定を限定公開にするかどうかを指定します。
           </span>
         </Box>
-        <Box className="w-20 ml-auto mr-2">
-          <Button variant="contained" onClick={handleClickCopy}>
-            Copy
+        <Box sx={{ margin: "1rem" }}>
+          <Button
+            variant="outlined"
+            onClick={handleClickHeaderCopy}
+            sx={{ boxShadow: 3 }}
+          >
+            Header Copy
+          </Button>
+          <Button variant="contained" onClick={handleClickCopy} sx={{ marginLeft: "0.5rem" }}>
+            Event Copy
           </Button>
           <Snackbar
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
