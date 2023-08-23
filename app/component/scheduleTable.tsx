@@ -1,27 +1,37 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import AddIcon from '@mui/icons-material/Add';
-import CancelIcon from '@mui/icons-material/Close';
-import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import EditIcon from '@mui/icons-material/Edit';
-import SaveIcon from '@mui/icons-material/Save';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import AddIcon from "@mui/icons-material/Add";
+import CancelIcon from "@mui/icons-material/Close";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import EditIcon from "@mui/icons-material/Edit";
+import SaveIcon from "@mui/icons-material/Save";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import {
-    DataGrid, GridActionsCellItem, GridColDef, GridCsvExportMenuItem, GridEventListener,
-    GridRowEditStopReasons, GridRowId, GridRowModel, GridRowModes, GridRowModesModel, GridRowsProp,
-    GridToolbarContainer, GridToolbarExportContainer
-} from '@mui/x-data-grid';
-import { randomId } from '@mui/x-data-grid-generator';
+  DataGrid,
+  GridActionsCellItem,
+  GridColDef,
+  GridCsvExportMenuItem,
+  GridEventListener,
+  GridRowEditStopReasons,
+  GridRowId,
+  GridRowModel,
+  GridRowModes,
+  GridRowModesModel,
+  GridRowsProp,
+  GridToolbarContainer,
+  GridToolbarExportContainer,
+} from "@mui/x-data-grid";
+import { randomId } from "@mui/x-data-grid-generator";
 
 const initialRows: GridRowsProp = [];
 
 interface EditToolbarProps {
   setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
   setRowModesModel: (
-    newModel: (oldModel: GridRowModesModel) => GridRowModesModel
+    newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
   ) => void;
 }
 
@@ -55,7 +65,7 @@ export default function ScheduleTable() {
 
   const handleRowEditStop: GridEventListener<"rowEditStop"> = (
     params,
-    event
+    event,
   ) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
       event.defaultMuiPrevented = true;

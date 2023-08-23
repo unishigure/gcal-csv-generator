@@ -1,23 +1,21 @@
 "use client";
 
-import 'dayjs/locale/ja';
+import { forwardRef, useState } from "react";
 
-import dayjs, { Dayjs } from 'dayjs';
-import { forwardRef, useState } from 'react';
+import { Box, Button, Checkbox, Snackbar, TextField } from "@mui/material";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { randomId } from "@mui/x-data-grid-generator";
+import { DatePicker, TimePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import dayjs, { Dayjs } from "dayjs";
+import "dayjs/locale/ja";
 
-import { Box, Button, Checkbox, Snackbar, TextField } from '@mui/material';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import { randomId } from '@mui/x-data-grid-generator';
-import { DatePicker, TimePicker } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+const Alert = forwardRef<HTMLDivElement, AlertProps>(
+  function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  },
+);
 
 export default function ScheduleForm(scheduleRows: Array<Object>) {
   const [rows, setRows] = useState(scheduleRows);
@@ -71,7 +69,7 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
 
   const handleCloseInvalid = (
     event?: React.SyntheticEvent | Event,
-    reason?: string
+    reason?: string,
   ) => {
     if (reason === "clickaway") return;
     setOpenInvalid(false);
@@ -79,7 +77,7 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
 
   const handleCloseCopied = (
     event?: React.SyntheticEvent | Event,
-    reason?: string
+    reason?: string,
   ) => {
     if (reason === "clickaway") return;
     setOpenCopied(false);
@@ -87,7 +85,7 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
 
   const handleCloseFailed = (
     event?: React.SyntheticEvent | Event,
-    reason?: string
+    reason?: string,
   ) => {
     if (reason === "clickaway") return;
     setOpenFailed(false);
