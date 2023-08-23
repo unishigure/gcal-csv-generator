@@ -1,7 +1,8 @@
-import { GridRowsProp } from "@mui/x-data-grid";
-import ScheduleForm from "./component/scheduleForm";
-import ScheduleTable from "./component/scheduleTable";
-import HowToDialog from "./component/howTo";
+import { GridRowsProp } from '@mui/x-data-grid';
+
+import HowToDialog from './component/howTo';
+import ScheduleForm from './component/scheduleForm';
+import ScheduleTable from './component/scheduleTable';
 
 let scheduleRows: Array<Object> = [];
 
