@@ -24,7 +24,7 @@ export default function HowToDialog() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="contained" onClick={handleClickOpen}>
         {"Usage"}
       </Button>
       <Dialog
