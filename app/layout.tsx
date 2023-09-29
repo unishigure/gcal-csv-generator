@@ -15,10 +15,17 @@ export const metadata: Metadata = {
   themeColor: "#94a3b8",
   robots: "index, follow",
   openGraph: {
-    images: "/image.png",
-  },
-  twitter: {
-    card: "summary_large_image",
+    type: "website",
+    url: "/",
+    title: "gCal CSV Generator",
+    description: "Generate CSV for Google Calendar",
+    images: [
+      {
+        url: "/image.png",
+        width: "1200",
+        height: "628",
+      },
+    ],
   },
 };
 
