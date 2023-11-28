@@ -35,7 +35,7 @@ interface EditToolbarProps {
   ) => void;
 }
 
-function Toolbar(props: EditToolbarProps) {
+function Toolbar(props: Readonly<EditToolbarProps>) {
   const { setRows, setRowModesModel } = props;
 
   const handleClick = () => {
