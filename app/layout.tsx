@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 
 import { env } from "node:process";
@@ -12,7 +12,6 @@ export const metadata: Metadata = {
     title: "gCal CSV Generator",
     description: "Generate CSV for Google Calendar",
     keywords: ["Google Calender", "CSV", "Tool"],
-    themeColor: "#94a3b8",
     robots: "index, follow",
     openGraph: {
         type: "website",
@@ -27,6 +26,10 @@ export const metadata: Metadata = {
             },
         ],
     },
+};
+
+export const viewport: Viewport = {
+    themeColor: "#94a3b8",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
