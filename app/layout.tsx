@@ -8,7 +8,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    metadataBase: env.BASE_URL ? new URL(env.BASE_URL) : null,
+    metadataBase: env.BASE_URL ? new URL(env.BASE_URL) : new URL("http://localhost"),
     title: "gCal CSV Generator",
     description: "Generate CSV for Google Calendar",
     keywords: ["Google Calender", "CSV", "Tool"],
