@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { env } from "node:process";
 
 import "./globals.css";
@@ -35,7 +36,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="ja">
-            <body className={inter.className}>{children}</body>
+            <body className={inter.className}>
+                <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+            </body>
         </html>
     );
 }
