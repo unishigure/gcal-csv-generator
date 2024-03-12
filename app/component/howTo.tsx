@@ -83,7 +83,7 @@ export default function HowToDialog() {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} autoFocus>
+                    <Button variant="outlined" onClick={handleClose} autoFocus>
                         {"OK"}
                     </Button>
                 </DialogActions>
