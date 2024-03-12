@@ -33,7 +33,14 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
     const [openFailed, setOpenFailed] = useState<boolean>(false);
 
     function handleClickHeaderCopy() {
-        const tag = `Subject,Start Date,Start Time,End Date,End Time,All Day Event,Description,Location,Private\n`;
+        const tag =
+            `Subject,` +
+            `Start Date,Start Time,` +
+            `End Date,End Time,` +
+            `All Day Event,` +
+            `Description,` +
+            `Location,` +
+            `Private\n`;
         copyToClipboard(tag);
     }
 
@@ -57,8 +64,12 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
         };
         const tag =
             `${newEvent.sub},` +
-            `${newEvent.sd},${newEvent.st},${newEvent.ed},${newEvent.et},` +
-            `${newEvent.isAl},${newEvent.des},${newEvent.loc},${newEvent.isPr}`;
+            `${newEvent.sd},${newEvent.st},` +
+            `${newEvent.ed},${newEvent.et},` +
+            `${newEvent.isAl},` +
+            `${newEvent.des},` +
+            `${newEvent.loc},` +
+            `${newEvent.isPr}`;
 
         copyToClipboard(tag);
     }
@@ -173,7 +184,9 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
                         }}
                     />
                     <span className="mt-auto mb-auto">All Day Event</span>
-                    <span className="mt-auto mb-auto ml-2 text-xs">{"終日の予定かどうかを示します。"}</span>
+                    <span className="mt-auto mb-auto ml-2 text-xs">
+                        {"終日の予定かどうかを示します。"}
+                    </span>
                 </Box>
 
                 <Box className="m-4">
@@ -211,7 +224,9 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
                         }}
                     />
                     <span className="mt-auto mb-auto">Private</span>
-                    <span className="mt-auto mb-auto ml-2 text-xs">{"予定を限定公開にするかどうかを指定します。"}</span>
+                    <span className="mt-auto mb-auto ml-2 text-xs">
+                        {"予定を限定公開にするかどうかを指定します。"}
+                    </span>
                 </Box>
 
                 <Box
@@ -228,7 +243,11 @@ export default function ScheduleForm(scheduleRows: Array<Object>) {
                     >
                         {"Header Copy"}
                     </Button>
-                    <Button variant="contained" onClick={handleClickCopy} sx={{ margin: "0 0.25rem" }}>
+                    <Button
+                        variant="contained"
+                        onClick={handleClickCopy}
+                        sx={{ margin: "0 0.25rem" }}
+                    >
                         {"Event Copy"}
                     </Button>
                 </Box>

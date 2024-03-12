@@ -33,7 +33,9 @@ export default function HowToDialog() {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"How to add Google Calender events"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">
+                    {"How to add Google Calender events"}
+                </DialogTitle>
                 <DialogContent sx={{ paddingBottom: "0" }}>
                     <DialogContentText id="alert-dialog-description">
                         <ol className="list-decimal pl-4 pr-4">

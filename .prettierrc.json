@@ -13,7 +13,7 @@
     ],
     "importOrderSeparation": true,
     "plugins": ["@trivago/prettier-plugin-sort-imports"],
-    "printWidth": 120,
+    "printWidth": 100,
     "semi": true,
     "singleQuote": false,
     "tabWidth": 4,
